@@ -37,7 +37,14 @@ const createUser = async ({ displayName, email, password, image }) => {
     expiresIn: '7d',
     algorithm: 'HS256',
   });
-  // console.log(typeof token, '<--');
   return token;
 };
-module.exports = { createUser };
+//
+const getAllUsers = async () => {
+  const allUsers = await User.findAll({
+    attributes: { exclude: ['password'] },
+  });
+  return allUsers;
+};
+
+module.exports = { createUser, getAllUsers };
