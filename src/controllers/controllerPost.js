@@ -3,7 +3,6 @@ const ServicePost = require('../services/servicePost');
 const createPost = async (req, res) => {
   const { id } = req.user;
   const responseService = await ServicePost.createPost(id, req.body);
-  console.log(responseService, '<---');
   if (responseService.error) {
     return res
     .status(responseService.error.code)
@@ -11,5 +10,9 @@ const createPost = async (req, res) => {
   }
   return res.status(201).json(responseService);
 };
+const getAllPosts = async (_req, res) => {
+  const responseService = await ServicePost.getAllPosts();
+  return res.status(200).json(responseService);
+};
 
-module.exports = { createPost };
+module.exports = { createPost, getAllPosts };
