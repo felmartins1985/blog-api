@@ -20,6 +20,7 @@ app.post('/categories', auth, controllerCategory.createCategory);
 app.get('/categories', auth, controllerCategory.getAllCategories);
 app.post('/post', auth, controllerPost.createPost);
 app.get('/post', auth, controllerPost.getAllPosts);
+app.get('/post/search', auth, controllerPost.searchPost);
 app.get('/post/:id', auth, controllerPost.getPostById);
 app.put('/post/:id', auth, controllerPost.updatedPost);
 app.delete('/post/:id', auth, controllerPost.deletePost);
