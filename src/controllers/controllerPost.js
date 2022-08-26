@@ -24,5 +24,17 @@ const getAllPosts = async (_req, res) => {
   }
   return res.status(200).json(responseService);
  };
+const updatedPost = async (req, res) => {
+  const { title, content } = req.body;
+  const { id } = req.params;
+  const { id: userId } = req.user;
+  const responseService = await ServicePost.updatedPost(id, userId, title, content);
+  if (responseService.error) {
+    return res
+    .status(responseService.error.code)
+    .json({ message: responseService.error.message });
+  }
+  res.status(200).json(responseService);
+};
 
-module.exports = { createPost, getAllPosts, getPostById };
+module.exports = { createPost, getAllPosts, getPostById, updatedPost };

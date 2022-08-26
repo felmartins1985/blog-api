@@ -40,4 +40,21 @@ const getPostById = async (id) => {
   if (!posts) return { error: { code: 404, message: 'Post does not exist' } };
   return posts; 
 };
-module.exports = { createPost, getAllPosts, getPostById };
+
+const updatedPost = async (id, userId, title, content) => {
+  if (!title || !content) {
+ return { 
+    error: { code: 400, message: 'Some required fields are missing' } }; 
+}
+  const post = await BlogPost.findByPk(id);
+  if (!post) return { error: { code: 404, message: 'Post does not exist' } };
+  if (post.userId !== userId) return { error: { code: 401, message: 'Unauthorized user' } };
+  await BlogPost.update({ title, content }, { where: { id } });
+  const updtPost = await BlogPost.findByPk(id, {
+    include: [{ model: Category, as: 'categories', through: { attributes: [] } },
+    { model: User, as: 'user', attributes: { exclude: ['password'] } }],
+  });
+  return updtPost;
+};
+
+module.exports = { createPost, getAllPosts, getPostById, updatedPost };

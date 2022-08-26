@@ -13,7 +13,6 @@ module.exports = async (req, res, next) => {
   try {
     const { email } = jwt.verify(token, JWT_SECRET);
     const { id } = await User.findOne({ where: { email } });
-    console.log(id, email, '<---');
     req.user = { id, email };
     next();
   } catch (err) {
