@@ -23,6 +23,7 @@ app.get('/post', auth, controllerPost.getAllPosts);
 app.get('/post/:id', auth, controllerPost.getPostById);
 app.put('/post/:id', auth, controllerPost.updatedPost);
 app.delete('/post/:id', auth, controllerPost.deletePost);
+app.delete('/user/me', auth, controllerUser.deleteUser);
 // É importante exportar a constante `app`,
 // para que possa ser utilizada pelo arquivo `src/server.js`
 module.exports = app;
