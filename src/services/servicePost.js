@@ -1,10 +1,10 @@
-const { BlogPost, sequelize, PostCategory } = require('../database/models');
+const { BlogPost, sequelize, PostCategory, Category } = require('../database/models');
 
 const validatePost = async ({ title, content, categoryIds }) => {
   if (!title || !content || !categoryIds) {
     return { error: { code: 400, message: 'Some required fields are missing' } };
   }
-  const { count } = await BlogPost.findAndCountAll({ where: { id: categoryIds } });
+  const { count } = await Category.findAndCountAll({ where: { id: categoryIds } });
   if (count !== categoryIds.length) {
     return { error: { code: 400, message: '"categoryIds" not found' } };
   }
