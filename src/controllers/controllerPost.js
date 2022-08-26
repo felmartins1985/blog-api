@@ -14,5 +14,15 @@ const getAllPosts = async (_req, res) => {
   const responseService = await ServicePost.getAllPosts();
   return res.status(200).json(responseService);
 };
+ const getPostById = async (req, res) => {
+  const { id } = req.params;
+  const responseService = await ServicePost.getPostById(id);
+  if (responseService.error) {
+    return res
+    .status(responseService.error.code)
+    .json({ message: responseService.error.message });
+  }
+  return res.status(200).json(responseService);
+ };
 
-module.exports = { createPost, getAllPosts };
+module.exports = { createPost, getAllPosts, getPostById };
