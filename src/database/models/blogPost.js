@@ -4,7 +4,7 @@ module.exports = (sequelize, DataTypes) => {
     title: DataTypes.STRING,
     userId: {
       type: DataTypes.INTEGER,
-      // foreignKey: true,
+      foreignKey: true,
     },
     content: DataTypes.STRING,
     published: DataTypes.DATE,

@@ -1,24 +1,32 @@
 module.exports = (sequelize, DataTypes) => {
   const PostCategory = sequelize.define('PostCategory', 
     {
-      postId:DataTypes.INTEGER ,
-      categoryId: DataTypes.INTEGER,
+      postId:{
+        type:DataTypes.INTEGER,
+        primaryKey: true,
+        foreingKey:true,
+      },
+      categoryId: {
+        type:DataTypes.INTEGER,
+        primaryKey: true,
+        foreingKey:true,
+      },
     },
     { timestamps: false },
   );
 
   PostCategory.associate = (models) => {
     models.BlogPost.belongsToMany(models.Category, {
-      as: 'blogposts',
-      through: PostCategory,
-      foreignKey: 'id',
-      otherKey: 'id',
-    });
-    models.Category.belongsToMany(models.BlogPost, {
       as: 'categories',
       through: PostCategory,
-      foreignKey: 'id',
-      otherKey: 'id',
+      foreignKey: 'postId',
+      otherKey: 'categoryId',
+    });
+    models.Category.belongsToMany(models.BlogPost, {
+      as: 'blogposts',
+      through: PostCategory,
+      foreignKey: 'categoryId',
+      otherKey: 'postId',
       // foreignKey sempre se refere ao model em
       //que chamamos belongsToMany, enquanto otherKey se refere ao model com o qual estamos criando a associação
     });
