@@ -81,7 +81,6 @@ const searchPost = async (q) => {
       { model: Category, as: 'categories', through: { attributes: [] } },
   ],
   });
-  console.log(responseService, '<---');
   return responseService;
 };
 module.exports = { createPost, getAllPosts, getPostById, updatedPost, deletePost, searchPost };
