@@ -25,7 +25,6 @@ const validationUser = async ({ displayName, email, password }) => {
   return true;
 };
 
-/* Recebemos o valor de `admin` que, por padrão, é `false` */
 const createUser = async ({ displayName, email, password, image }) => {
   const validation = await validationUser({ displayName, email, password });
   if (validation.error) {

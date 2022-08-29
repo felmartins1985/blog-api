@@ -21,11 +21,13 @@ const createPost = async (id, { title, content, categoryIds }) => {
       postId: dataValues.id,
       categoryId: number,
     }));
+    // console.log(categories, '<----');
     await PostCategory.bulkCreate(categories, { transaction });
     return dataValues;
   });
   return trs;
 };
+
 const getAllPosts = async () => {
     const posts = await BlogPost.findAll({
       include: [{ model: Category, as: 'categories', through: { attributes: [] } },
@@ -33,6 +35,7 @@ const getAllPosts = async () => {
     });
     return posts; 
 };
+
 const getPostById = async (id) => {
   const posts = await BlogPost.findByPk(id, {
     include: [{ model: Category, as: 'categories', through: { attributes: [] } },
@@ -57,6 +60,7 @@ const updatedPost = async (id, userId, title, content) => {
   });
   return updtPost;
 };
+
 const deletePost = async (id, userId) => {
   const post = await BlogPost.findByPk(id);
   if (!post) return { error: { code: 404, message: 'Post does not exist' } };
@@ -64,6 +68,7 @@ const deletePost = async (id, userId) => {
   await BlogPost.destroy({ where: { id } });
   return {};
 };
+
 const searchPost = async (q) => {
   if (!q || q === '') {
     return BlogPost.findAll({

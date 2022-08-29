@@ -2,7 +2,7 @@ const ServiceLogin = require('../services/serviceLogin');
 
 const login = async (req, res) => {
   const responseService = await ServiceLogin.login(req.body);
-  console.log(responseService, '<--');
+  // console.log(responseService, '<--');
   if (responseService.error) {
     return res
     .status(responseService.error.code)

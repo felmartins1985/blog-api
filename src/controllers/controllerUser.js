@@ -10,10 +10,11 @@ const createUser = async (req, res) => {
   return res.status(201).json({ token: responseService });
 };
 
-const getAllUsers = async (req, res) => {
+const getAllUsers = async (_req, res) => {
   const responseService = await ServiceUser.getAllUsers();
   return res.status(200).json(responseService);
 };
+
 const getUserById = async (req, res) => {
   const { id } = req.params;
   const responseService = await ServiceUser.getUserById(id);

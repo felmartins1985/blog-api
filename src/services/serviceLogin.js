@@ -3,7 +3,6 @@ const { User } = require('../database/models');
 
 const { JWT_SECRET } = process.env;
 //
-/* Recebemos o valor de `admin` que, por padrão, é `false` */
 const login = async ({ password, email }) => {
   if (email === '' || password === '') {
     return {
@@ -24,5 +23,5 @@ const login = async ({ password, email }) => {
   });
   // console.log(typeof token, '<--');
   return token;
-};
+}; 
 module.exports = { login };
