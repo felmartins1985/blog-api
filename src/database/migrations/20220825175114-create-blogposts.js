@@ -34,8 +34,7 @@ module.exports = {
           model: 'Users',
           // Informa a coluna da referência que é a chave correspondente
           key: 'id',
-        },
-      },
+        },      },
     });
   },
   down: async (queryInterface, _Sequelize) => {

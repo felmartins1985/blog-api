@@ -14,7 +14,10 @@ module.exports = (sequelize, DataTypes) => {
 
   User.associate = (models) => {
     User.hasMany(models.BlogPost,
-      { foreignKey: 'userId', as: 'blogposts' });
+      { foreignKey: 'userId', as: 'blogposts' }); // dentro da chave foreingKey eu coloco
+      // o nome da chave estrangeira que está na tabela BlogPosts. E o mesmo nome que eu 
+      // coloco no model BlogPost, dentro do associate.
+      // o nome da foreingKey TEM QUE SER IGUAL
   };
 
   return User;
